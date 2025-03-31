@@ -1,0 +1,481 @@
+/* Import Montserrat font at the top of the file */
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap');
+
+/* Add a root/body style to apply font globally */
+:root {
+  font-family: 'Montserrat', sans-serif;
+}
+
+/* Hero Section */
+.hero {
+  display: flex;
+  justify-content: center;
+}
+
+/* Main Container */
+.scdcontainer {
+  width: 100%;
+  max-width: 600px;
+  background: white;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Header Section */
+.heading_and_button {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  margin-bottom: 1rem;
+  padding: 0 4px;
+}
+.heading_and_button span {
+  font-size: 18px;
+  font-weight: 600;
+  color: #333;
+  font-family: 'Montserrat', sans-serif;
+}
+
+/* Book Appointment Button */
+.bookButton,
+.nextButton {
+  background-color: #0f4d2d;
+  color: white;
+  padding: 8px 20px;
+  border: none;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  width: auto;
+  margin-top: 0;
+  white-space: nowrap;
+  font-family: 'Montserrat', sans-serif;
+}
+.bookButton {
+  align-items: center;
+  margin-top: 0;
+  width: 40%;
+}
+
+.bookButton:disabled,
+.nextButton:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+.consultationTabs {
+  display: flex;
+  margin-bottom: 15px;
+  width: 100%;
+}
+
+.tabButton {
+  background-color: white;
+  border: 1px solid #0f4d2d; /* Reduced border thickness */
+  color: #0f4d2d;
+  padding: 8px 12px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+  width: 50%;
+  /* Remove border radius except for outer corners */
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 500;
+}
+
+/* Add specific border radius to first and last buttons */
+.tabButton:first-child {
+  border-radius: 4px 0 0 4px;
+  border-right: none; /* Remove right border from first button */
+}
+
+.tabButton:last-child {
+  border-radius: 0 4px 4px 0;
+}
+
+.activeTab {
+  background-color: #0f4d2d;
+  color: white;
+}
+
+/* Address Text */
+.address {
+  margin-top: 5px;
+  color: #555;
+  font-size: 14px;
+}
+
+/* Remove the old dropdown styles and add new location display styles */
+.locationSelector {
+  width: 100%;
+  margin-bottom: 15px;
+}
+
+.locationDisplay {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  padding: 12px 16px;
+  background-color: white;
+  border: 1px solid #e0e0e0;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.locationDisplay span {
+  color: #333;
+  font-size: 14px;
+  font-weight: 500;
+  font-family: 'Montserrat', sans-serif;
+}
+
+.chevronIcon {
+  color: #666;
+}
+
+.locationDisplay:hover {
+  border-color: #0f4d2d;
+}
+
+/* Update month selector styles */
+.monthSelector {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  margin-bottom: 8px;
+}
+
+.currentMonth {
+  font-size: 16px;
+  font-weight: 600;
+  color: #1a1a1a;
+  min-width: 150px;
+  text-align: center;
+  font-family: 'Montserrat', sans-serif;
+}
+
+/* Update date selector styles */
+.dateScrollContainer {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+  position: relative;
+}
+
+.dateSelector {
+  flex: 1;
+  display: flex;
+  gap: 10px;
+  overflow-x: auto;
+  padding: 10px 0;
+  width: 100%;
+  scroll-behavior: smooth;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+  position: relative;
+}
+
+.dateSelector::-webkit-scrollbar {
+  display: none;
+}
+
+.dateScrollButton {
+  min-width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  border: 1px solid #e0e0e0;
+  background: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  color: #666;
+  padding: 0;
+  transition: all 0.2s ease;
+  z-index: 2;
+}
+
+.dateScrollButton:hover {
+  border-color: #0f4d2d;
+  color: #0f4d2d;
+}
+
+.dateScrollButton:disabled {
+  color: #ccc;
+  border-color: #e0e0e0;
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
+/* Optional: Add a left scroll button when there's content to scroll back */
+.dateScrollButtonLeft {
+  composes: dateScrollButton;
+  display: none; /* Initially hidden */
+}
+
+/* Show left scroll button when there's scrollable content */
+.dateSelector[data-can-scroll-left='true'] ~ .dateScrollButtonLeft {
+  display: flex;
+}
+
+.dateButton {
+  position: relative;
+  min-width: 90px;
+  padding:6px 12px;
+  border: 1px solid #e5e5e5;
+  border-radius: 8px;
+  background: white;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+}
+
+.dateButton .day {
+  font-size: 14px;
+  color: #666;
+  font-family: 'Montserrat', sans-serif;
+}
+
+.dateButton .date {
+  font-size: 14px;
+  color: #1a1a1a;
+  font-family: 'Montserrat', sans-serif;
+}
+
+.dateButton.selectedDate {
+  background: #0f4d2d;
+  border-color: #0f4d2d;
+}
+
+.dateButton.selectedDate .day,
+.dateButton.selectedDate .date {
+  color: white;
+}
+
+.unavailableDate {
+  background: #f5f5f5;
+  border-color: #e5e5e5;
+  cursor: pointer;
+}
+
+.unavailableDate .day,
+.unavailableDate .date {
+  color: #999;
+}
+
+.dateTooltip {
+  visibility: hidden;
+  position: absolute;
+  bottom: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: rgba(0, 0, 0, 0.8);
+  color: white;
+  text-align: center;
+  padding: 5px 10px;
+  border-radius: 4px;
+  font-size: 12px;
+  white-space: nowrap;
+  z-index: 1;
+  margin-bottom: 5px;
+}
+
+/* Arrow for tooltip */
+.dateTooltip::after {
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  margin-left: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: rgba(0, 0, 0, 0.8) transparent transparent transparent;
+}
+
+/* Show tooltip on hover */
+.unavailableDate:hover .dateTooltip {
+  visibility: visible;
+}
+
+/* Time Section */
+.timeSection {
+  margin-top: 20px;
+  background: #f9f9f9;
+  padding: 10px;
+  border-radius: 8px;
+  width: 100%;
+}
+
+/* Time Header */
+.timeHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center; /* Add this to vertically align items */
+  font-weight: 600; /* Slightly reduced from bold */
+  font-size: 16px;
+  padding: 0 4px; /* Add some padding */
+  font-family: 'Montserrat', sans-serif;
+}
+
+/* Slot Container */
+.slotContainer {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.slotButton {
+  position: relative;
+  padding: 10px 15px;
+  border-radius: 5px;
+  font-size: 14px;
+  cursor: pointer;
+  border: 1px solid transparent;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 500;
+}
+
+.slotButton.unavailable {
+  background: #ddd;
+  color: #888;
+  cursor: not-allowed;
+}
+
+.slotButton.available {
+  background: white;
+  color: black;
+  border-color: #0f4d2d;
+}
+
+.slotButton.selectedTime {
+  background-color: #0f4d2d;
+  color: white;
+}
+
+/* No Slots Message */
+.noSlotsMessage {
+  text-align: center;
+  color: #888;
+  font-size: 14px;
+  margin-top: 10px;
+}
+
+.monthNav {
+  min-width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  border: 1px solid #e0e0e0;
+  background: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  color: #666;
+  padding: 0;
+  transition: all 0.2s ease;
+}
+
+.monthNav:hover {
+  border-color: #0f4d2d;
+  color: #0f4d2d;
+}
+
+.monthNav:disabled {
+  color: #ccc;
+  border-color: #e0e0e0;
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
+.monthNav svg {
+  width: 20px;
+  height: 20px;
+}
+
+/* Tooltip styles */
+.tooltip {
+  visibility: hidden;
+  position: absolute;
+  bottom: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: rgba(0, 0, 0, 0.8);
+  color: white;
+  text-align: center;
+  padding: 5px 10px;
+  border-radius: 4px;
+  font-size: 12px;
+  white-space: nowrap;
+  z-index: 1;
+  margin-bottom: 5px;
+}
+
+/* Show tooltip on hover */
+.slotButton.unavailable:hover .tooltip {
+  visibility: visible;
+}
+
+.appointmentContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  width: 100%;
+}
+
+.slotsContainer {
+  width: 100%;
+}
+
+.noAvailabilityMessage {
+  text-align: center;
+  padding: 2rem;
+  background: #f5f5f5;
+  border-radius: 8px;
+  color: #666;
+  font-size: 1rem;
+  margin-top: 1rem;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 500;
+}
+
+/* Update the slot count style to look like a pill */
+.slotCount {
+  background: rgba(250, 245, 255, 1);
+  padding: 4px 12px;
+  border-radius: 12px;
+  font-size: 13px;
+  color: #333;
+  font-weight: 600;
+  font-family: 'Montserrat', sans-serif;
+}
+
+.nextButton {
+  background-color: #0f4d2d;
+  color: white;
+  padding: 12px 20px; /* Slightly increased padding */
+  border: none;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  width: 100%; /* Changed from auto to 100% */
+  margin-top: 20px; /* Add some space above the button */
+  white-space: nowrap;
+  font-family: 'Montserrat', sans-serif;
+}
+
+.nextButton:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}

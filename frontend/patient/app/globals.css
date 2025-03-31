@@ -1,0 +1,59 @@
+body {
+  font-family: var(--font-montserrat), sans-serif;
+  padding: 0;
+  margin: 0;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+.main_layout {
+  padding-top: 80px; /* Height of header */
+  min-height: calc(100vh - 80px);
+  width: 100%;
+}
+
+* {
+  box-sizing: border-box;
+}
+/* html {
+  scrollbar-gutter: stable;
+} */
+/* Page wrapper ensures smooth transitions */
+
+/* Initially hide the page */
+/* Initial fade-in animation */
+.fade-in {
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeInAnimation 0.8s ease-in-out forwards;
+}
+
+/* Keyframes for smooth fade-in effect */
+@keyframes fadeInAnimation {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* 🔹 Add a loading overlay while waiting for page */
+.loading-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.2); /* 🔹 Dim background */
+  backdrop-filter: blur(5px); /* 🔹 Slight blur effect */
+  z-index: 10;
+}
+
+/* Remove these as they conflict with the new structure */
+/* main {
+  height: calc(100vh - 88px);
+  overflow: hidden;
+} */

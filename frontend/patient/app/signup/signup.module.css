@@ -1,0 +1,72 @@
+.container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem 0;
+  min-height: calc(100vh - 90px);
+  background: url("../../public/Hero Image.svg") center/cover no-repeat;
+}
+
+.form_wrapper {
+  width: 500px;
+  display: flex;
+  flex-direction: column;
+  font-family: "Montserrat", sans-serif;
+  padding: 1rem 1.5rem;
+  border-radius: 1.5rem;
+  background: rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(10px);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.form_wrapper h2 {
+  font-weight: 500;
+  margin-bottom: 0;
+}
+
+.form_wrapper p {
+  font-size: 1rem;
+  font-weight: 400;
+  color: #8c8c8c;
+}
+
+.signup_link {
+  text-decoration: none;
+  color: #1c4a2a;
+  font-weight: 500;
+}
+
+.form_fields {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  padding: 1rem 0;
+}
+
+.form_fields label {
+  color: #8c8c8c;
+}
+
+.form_fields input,
+.form_fields button {
+  padding: 1rem 0.75rem;
+  border-radius: 0.6rem;
+  border: none;
+}
+
+.form_fields input {
+  background: #fff;
+}
+
+.form_fields button {
+  color: white;
+  cursor: pointer;
+}
+
+.form_fields button:first-of-type {
+  background-color: #1c4a2a;
+}
+
+.form_fields button:last-of-type {
+  background-color: #c6b09a;
+}

@@ -1,0 +1,27 @@
+.container {
+  background-color: white;
+  border: 1px solid #1c4a2a;
+  padding: 0rem 2rem;
+  width: 100%;
+}
+
+.wrapper {
+  display: flex;
+  justify-content: space-between;
+}
+
+.copyright {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.contacts {
+  display: flex;
+  gap: 1.5rem;
+}
+.contacts {
+  display: flex;
+  gap: 1rem;
+  padding: 1rem;
+}

@@ -1,0 +1,271 @@
+.loading {
+  text-align: center;
+  padding: 2rem;
+  color: #6c757d;
+}
+
+.error {
+  text-align: center;
+  padding: 2rem;
+  color: #dc3545;
+  background-color: #f8d7da;
+  border-radius: 8px;
+  margin: 1rem 0;
+}
+
+.dashboard {
+  padding: 2rem;
+  background-color: #1a1a1a;
+  color: #fff;
+}
+
+.dashboardHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+}
+
+.pageTitle {
+  font-size: 2rem;
+  margin-bottom: 0;
+  color: #fff;
+}
+
+.filtersWrapper {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  align-items: center;
+}
+
+.filterContainer {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.filterLabel {
+  font-size: 1rem;
+  color: #e0e0e0;
+  white-space: nowrap;
+}
+
+.filterSelect {
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  background-color: #2d2d2d;
+  border: 1px solid #3d3d3d;
+  color: #fff;
+  font-size: 0.95rem;
+  min-width: 140px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='white'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M19 9l-7 7-7-7'%3E%3C/path%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 0.75rem center;
+  background-size: 1em;
+  padding-right: 2.5rem;
+}
+
+.filterSelect:focus {
+  outline: none;
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.2);
+}
+
+.appointmentsContainer {
+  background: #1f1f1f;
+  border-radius: 8px;
+  border: 1px solid #2d2d2d;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+}
+
+.appointmentsHeader {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  background: #2d2d2d;
+  padding: 1rem;
+  border-bottom: 1px solid #3d3d3d;
+  font-weight: 600;
+}
+
+.headerCell {
+  padding: 0.5rem;
+  color: #e0e0e0;
+}
+
+.appointmentRow {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  padding: 1rem;
+  border-bottom: 1px solid #2d2d2d;
+  align-items: center;
+}
+
+.appointmentRow:last-child {
+  border-bottom: none;
+}
+
+.cell {
+  padding: 0.5rem;
+  color: #e0e0e0;
+}
+
+.statusBadge {
+  display: inline-block;
+  padding: 0.25rem 0.75rem;
+  border-radius: 20px;
+  font-size: 0.875rem;
+  font-weight: 500;
+}
+
+.statusPending {
+  background-color: #fff3cd;
+  color: #856404;
+}
+
+.statusApproved {
+  background-color: #d4edda;
+  color: #155724;
+}
+
+.statusCompleted {
+  background-color: #cff4fc;
+  color: #055160;
+}
+
+.statusRejected {
+  background-color: #f8d7da;
+  color: #721c24;
+}
+
+.actionButtons {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.actionButton {
+  padding: 0.25rem 0.75rem;
+  border: none;
+  border-radius: 4px;
+  font-size: 0.875rem;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.actionButton:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.approveButton {
+  background-color: #28a745;
+  color: white;
+}
+
+.approveButton:hover:not(:disabled) {
+  background-color: #218838;
+}
+
+.completeButton {
+  background-color: #17a2b8;
+  color: white;
+}
+
+.completeButton:hover:not(:disabled) {
+  background-color: #138496;
+}
+
+.rejectButton {
+  background-color: #dc3545;
+  color: white;
+}
+
+.rejectButton:hover:not(:disabled) {
+  background-color: #c82333;
+}
+
+.noAppointments {
+  text-align: center;
+  padding: 2rem;
+  color: #9ca3af;
+  font-style: italic;
+}
+
+@media (max-width: 1024px) {
+  .dashboardHeader {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  
+  .filtersWrapper {
+    margin-top: 1rem;
+    width: 100%;
+  }
+}
+
+@media (max-width: 768px) {
+  .dashboardHeader {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  
+  .appointmentsHeader {
+    display: none;
+  }
+
+  .appointmentRow {
+    display: flex;
+    flex-direction: column;
+    padding: 1rem;
+    gap: 0.5rem;
+  }
+
+  .cell {
+    padding: 0.25rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .cell::before {
+    content: attr(data-label);
+    font-weight: 600;
+    margin-right: 1rem;
+  }
+
+  .actionButtons {
+    justify-content: flex-end;
+    margin-top: 0.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .dashboard {
+    padding: 1rem;
+  }
+
+  .filtersWrapper {
+    flex-direction: column;
+    align-items: stretch;
+    width: 100%;
+  }
+  
+  .filterContainer {
+    width: 100%;
+  }
+
+  .filterLabel {
+    min-width: 60px;
+  }
+
+  .filterSelect {
+    flex: 1;
+  }
+}

@@ -1,0 +1,166 @@
+.container {
+  padding: 0;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.wrapper {
+  display: flex;
+  height: calc(100vh - 148px); /* Adjust based on your footer height */
+  overflow-y: hidden;
+  position: relative;
+}
+
+.hero_text {
+  padding: 3rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background-color: rgba(28, 74, 42, 1);
+  color: white;
+  width: 50%;
+}
+
+.hero_text h1 {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 3rem;
+  font-weight: 500;
+  margin-bottom: 1rem;
+  max-width: 60%;
+}
+
+.hero_text p {
+  font-family: 'Montserrat', sans-serif;
+  line-height: 1.6;
+  color: rgba(255, 255, 255, 0.8);
+  max-width: 60%;
+}
+
+.hero_img {
+  position: relative;
+  width: 50%;
+  background-image: url("@/public/mask-group.svg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.appointmentContainer {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  /* background: white; */
+  padding: 2.5rem;
+  border-radius: 12px;
+  box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  /* max-width: 650px; */
+  min-height: 650px;
+  display: flex;
+  flex-direction: column;
+}
+
+.pageContainer {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background-color: rgba(28, 74, 42, 1);
+}
+
+.mainContent {
+  flex: 1;
+  width: 100%;
+}
+
+.contentWrapper {
+  display: flex;
+  padding: 40px;
+  gap: 40px;
+  max-width: 1400px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.footerWrapper {
+  width: 100%;
+  background-color: white;
+  margin-top: auto;
+}
+
+.leftSection {
+  flex: 1;
+  padding-top: 40px;
+}
+
+.title {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 42px;
+  font-weight: 700;
+  color: white;
+  line-height: 1.2;
+  margin-bottom: 24px;
+}
+
+.description {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 16px;
+  line-height: 1.6;
+  color: rgba(255, 255, 255, 0.8);
+  max-width: 500px;
+}
+
+.rightSection {
+  flex: 1;
+  max-width: 600px;
+  background: white;
+  border-radius: 8px;
+  padding: 24px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+}
+
+/* Responsive adjustments */
+@media (max-width: 1024px) {
+  .wrapper {
+    flex-direction: column;
+    height: auto;
+  }
+
+  .hero_text,
+  .hero_img {
+    width: 100%;
+    padding: 2rem;
+  }
+
+  .hero_text h1,
+  .hero_text p {
+    max-width: 100%;
+    text-align: center;
+  }
+
+  .appointmentContainer {
+    position: relative;
+    width: 95%;
+    max-width: 650px;
+    transform: none;
+    left: auto;
+    top: auto;
+    margin: 2rem auto;
+    min-height: auto;
+    padding: 2rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .hero_text h1 {
+    font-size: 2rem;
+  }
+
+  .hero_text p {
+    font-size: 14px;
+  }
+}
