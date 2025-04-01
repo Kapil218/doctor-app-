@@ -12,7 +12,6 @@
 
 /* Wrapper */
 .wrapper {
-
   margin: 0 auto;
   display: flex;
   justify-content: space-between;
@@ -36,7 +35,7 @@
   text-decoration: none;
   color: #8c8c8c;
   font-size: 1rem;
-  font-family: "Montserrat", sans-serif;
+
   font-weight: 500;
   transition: color 0.2s ease;
 }
@@ -59,7 +58,6 @@
 .loginButton,
 .registerButton,
 .logoutButton {
-  font-family: "Montserrat", sans-serif;
   padding: 0.7rem 1.5rem;
   border-radius: 0.4rem;
   cursor: pointer;
@@ -93,23 +91,109 @@
 .mobileMenu {
   display: none;
   position: fixed;
-  top: 80px;
+  top: 0;
   left: 0;
   right: 0;
   background: white;
-  padding: 2rem;
+  padding: 1rem;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  transform: translateY(-150%);
-  transition: transform 0.3s ease-in-out;
+  transform: translateX(-100%);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   z-index: 999;
+  height: 100vh;
+  overflow-y: auto;
 }
 
 .mobileMenu.active {
-  transform: translateY(0);
+  transform: translateX(0);
   display: flex;
   flex-direction: column;
   gap: 1.5rem;
+}
+
+/* Logo container in mobile menu */
+.mobileMenuHeader {
+  display: flex;
+  justify-content: space-between;
   align-items: center;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid #e0e0e0;
+  margin-bottom: 1rem;
+}
+
+/* Navigation Links in Mobile Menu */
+.mobileMenu .navLinks {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  width: 100%;
+}
+
+.mobileMenu a {
+  color: #1c4a2a;
+  font-size: 1rem;
+  font-weight: 500;
+  text-decoration: none;
+  padding: 0.75rem 1rem;
+  width: 100%;
+  text-align: left;
+  border-radius: 8px;
+  transition: all 0.2s ease;
+  display: block;
+}
+
+.mobileMenu a:hover {
+  background: rgba(28, 74, 42, 0.1);
+}
+
+.mobileMenu a.activeLink {
+  background: #1c4a2a;
+  color: white;
+}
+
+/* Button Container in Mobile Menu */
+.mobileMenu .buttonContainer {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  gap: 0.75rem;
+  margin-top: auto;
+  padding-top: 1rem;
+}
+
+.mobileMenu .loginButton,
+.mobileMenu .registerButton,
+.mobileMenu .logoutButton {
+  width: 100%;
+  padding: 0.75rem;
+  font-size: 1rem;
+  text-align: center;
+  border-radius: 8px;
+}
+
+.mobileMenu .loginButton {
+  background: white;
+  border: 1px solid #1c4a2a;
+  color: #1c4a2a;
+}
+
+.mobileMenu .registerButton {
+  background: #1c4a2a;
+  color: white;
+  border: none;
+}
+
+/* Close button */
+.closeButton {
+  background: none;
+  border: none;
+  padding: 0.5rem;
+  cursor: pointer;
+  color: #1c4a2a;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
 }
 
 /* Hamburger Icon */
@@ -118,11 +202,17 @@
   background: none;
   border: none;
   cursor: pointer;
-  padding: 5px;
+  padding: 10px;
   z-index: 10;
   width: 30px;
-  height: 20px;
+  height: 24px;
   position: relative;
+  transition: all 0.3s ease;
+  border-radius: 4px;
+}
+
+.hamburger:hover {
+  background: rgba(28, 74, 42, 0.1);
 }
 
 .hamburger span {
@@ -131,40 +221,45 @@
   height: 2px;
   width: 100%;
   background: #1c4a2a;
-  border-radius: 2px;
+  border-radius: 4px;
   opacity: 1;
   left: 0;
   transform: rotate(0deg);
-  transition: .25s ease-in-out;
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 /* Position the three lines */
 .hamburger span:nth-child(1) {
-  top: 0px;
+  top: 2px;
+  transform-origin: left center;
 }
 
 .hamburger span:nth-child(2) {
-  top: 9px;
+  top: 11px;
+  transform-origin: left center;
 }
 
 .hamburger span:nth-child(3) {
-  top: 18px;
+  top: 20px;
+  transform-origin: left center;
 }
 
 /* Animate to X when menu is open */
 .hamburger.active span:nth-child(1) {
-  top: 9px;
   transform: rotate(45deg);
+  top: 3px;
+  left: 4px;
 }
 
 .hamburger.active span:nth-child(2) {
-  opacity: 0;
   width: 0%;
+  opacity: 0;
 }
 
 .hamburger.active span:nth-child(3) {
-  top: 9px;
   transform: rotate(-45deg);
+  top: 20px;
+  left: 4px;
 }
 
 /* Media Queries */
@@ -172,15 +267,15 @@
   .container {
     padding: 1rem;
   }
-  
+
   .link_wrapper {
     gap: 1rem;
   }
-  
+
   .navLinks {
     gap: 1rem;
   }
-  
+
   .loginButton,
   .registerButton,
   .logoutButton {
@@ -192,49 +287,20 @@
   .navLinks {
     display: none;
   }
-  
+
   .buttonContainer {
     display: none;
   }
-  
+
   .hamburger {
     display: block;
   }
-  
+
   .mobileMenu {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 1.5rem;
-    transform: translateY(-150%);
-    opacity: 0;
-    visibility: hidden;
-    transition: all 0.3s ease-in-out;
+    display: none;
   }
-  
+
   .mobileMenu.active {
-    transform: translateY(0);
-    opacity: 1;
-    visibility: visible;
-  }
-  
-  .mobileMenu a {
-    color: #8c8c8c;
-    text-decoration: none;
-    padding: 0.5rem 0;
-    width: 100%;
-    text-align: center;
-    font-size: 1.1rem;
-  }
-  
-  .mobileMenu .buttonContainer {
     display: flex;
-    flex-direction: column;
-    width: 100%;
-    gap: 0.5rem;
-  }
-  
-  .mobileMenu button {
-    width: 100%;
   }
 }

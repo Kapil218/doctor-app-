@@ -3,6 +3,7 @@
 import React from 'react';
 import styles from './home.module.css';
 import Link from 'next/link';
+import Image from 'next/image';
 
 export default function HomePage() {
   return (
@@ -14,7 +15,7 @@ export default function HomePage() {
           Hands.
         </h1>
         <p className={styles.description}>
-          Take control of your healthcare with CareMate. Book appointments with ease, explore health blogs, and stay on top of your well-being, all in one place.
+          Take control of your healthcare with MedCare. Book appointments with ease, explore health blogs, and stay on top of your well-being, all in one place.
         </p>
         <Link href="/appointments">
           <button className={styles.getStartedButton}>
@@ -25,9 +26,13 @@ export default function HomePage() {
 
       {/* Right Section */}
       <div className={styles.heroImage}>
-        <img 
+        <Image 
           src="/landingpage.svg" 
-          alt="Doctor with patient" 
+          alt="Doctor with patient"
+          fill
+          priority
+          sizes="(max-width: 1024px) 100vw, 50vw"
+          style={{ objectFit: 'cover' }}
         />
       </div>
     </div>

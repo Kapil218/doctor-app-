@@ -14,22 +14,37 @@ interface Doctor {
   image?: string;
 }
 
-
 const DoctorsPage = () => {
   const router = useRouter();
   const [doctors, setDoctors] = useState<Doctor[]>([]);
+  const [isTopRated, setIsTopRated] = useState(true);
+  const [totalDoctors, setTotalDoctors] = useState(0);
   const [filters, setFilters] = useState({
     rating: "",
     experience: "",
     gender: "",
   });
   const [pendingFilters, setPendingFilters] = useState(filters);
+  const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
+  const dropdownRefs = useRef<{ [key: string]: HTMLDivElement | null }>({});
   const [query, setQuery] = useState("");
   const [debouncedQuery, setDebouncedQuery] = useState(query);
   const [page, setPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
 
   const debounceRef = useRef<NodeJS.Timeout | null>(null);
+
+  useEffect(() => {
+    // Close dropdowns when clicking outside
+    const handleClickOutside = (event: MouseEvent) => {
+      if (!Object.values(dropdownRefs.current).some(ref => ref?.contains(event.target as Node))) {
+        setActiveDropdown(null);
+      }
+    };
+
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
+  }, []);
 
   useEffect(() => {
     if (debounceRef.current) clearTimeout(debounceRef.current);
@@ -51,8 +66,12 @@ const DoctorsPage = () => {
 
       if (debouncedQuery.trim() !== "") {
         params.append("query", debouncedQuery);
+        setIsTopRated(false);
       } else if (!filtersApplied) {
         params.append("topRated", "true");
+        setIsTopRated(true);
+      } else {
+        setIsTopRated(false);
       }
 
       if (filters.rating) params.append("rating", filters.rating);
@@ -71,6 +90,7 @@ const DoctorsPage = () => {
         if (data.statusCode === 200) {
           setDoctors(data.data.doctors);
           setTotalPages(data.data.pagination?.totalPages || 1);
+          setTotalDoctors(data.data.pagination?.totalDoctors || 0);
         }
       } catch (error) {
         console.error("Error fetching doctors:", error);
@@ -95,23 +115,163 @@ const DoctorsPage = () => {
     setPage(1);
   };
 
+  const toggleDropdown = (dropdownName: string) => {
+    setActiveDropdown(activeDropdown === dropdownName ? null : dropdownName);
+  };
+
+  const handleFilterChange = (key: string, value: string) => {
+    setFilters(prev => ({ ...prev, [key]: value }));
+    setActiveDropdown(null);
+    setPage(1);
+  };
+
+  const clearFilter = (key: string) => {
+    setFilters(prev => ({ ...prev, [key]: "" }));
+    setPage(1);
+  };
+
+  const getFilterLabel = (key: string, value: string) => {
+    if (!value) return `Select ${key}`;
+    
+    switch (key) {
+      case 'rating':
+        return `${value} star${value === '1' ? '' : 's'}`;
+      case 'experience':
+        return `${value} years`;
+      case 'gender':
+        return value;
+      default:
+        return value;
+    }
+  };
+
   return (
     <div className={styles.container}>
-      <div className={styles.searchBar}>
-        <input
-          type="text"
-          placeholder="Search doctors"
-          value={query}
-          onChange={(e) => setQuery(e.target.value)}
-        />
+      <h1 className={styles.mainTitle}>Find a doctor at your own ease</h1>
+      <div className={styles.searchWrapper}>
+        <div className={styles.searchBar}>
+          <div className={styles.searchContainer}>
+            <svg className={styles.searchIcon} viewBox="0 0 24 24" fill="none" stroke="currentColor">
+              <path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+            </svg>
+            <input
+              type="text"
+              placeholder="Search doctors"
+              value={query}
+              onChange={(e) => setQuery(e.target.value)}
+            />
+          </div>
+        </div>
       </div>
-
-      <h2 className={styles.header}>{doctors.length} doctors available</h2>
+      
+      <h2 className={styles.header}>
+        {isTopRated ? "Our Top Doctors" : `${totalDoctors} doctors available`}
+      </h2>
       <p className={styles.subHeader}>
         Book appointments with minimum wait-time & verified doctor details
       </p>
 
+      {/* Mobile/Tablet Dropdowns */}
+      <div className={styles.filterDropdowns}>
+        {/* Rating Dropdown */}
+        <div className={styles.filterDropdown} ref={(el) => { dropdownRefs.current['rating'] = el }}>
+          <button 
+            className={`${styles.dropdownButton} ${activeDropdown === 'rating' ? styles.active : ''} ${filters.rating ? styles.activeFilter : ''}`}
+            onClick={() => toggleDropdown('rating')}
+          >
+            {getFilterLabel('rating', filters.rating)}
+            {filters.rating && (
+              <button className={styles.clearButton} onClick={(e) => { e.stopPropagation(); clearFilter('rating'); }}>
+                ×
+              </button>
+            )}
+          </button>
+          <div className={`${styles.dropdownContent} ${activeDropdown === 'rating' ? styles.active : ''}`}>
+            {["", "1", "2", "3", "4", "5"].map((r) => (
+              <div key={r} className={styles.filterOption}>
+                <input
+                  type="radio"
+                  id={`rating-${r}`}
+                  name="rating"
+                  value={r}
+                  checked={filters.rating === r}
+                  onChange={() => handleFilterChange("rating", r)}
+                />
+                <label htmlFor={`rating-${r}`}>
+                  {r ? `${r} star${r === '1' ? '' : 's'}` : "Show all"}
+                </label>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* Experience Dropdown */}
+        <div className={styles.filterDropdown} ref={(el) => { dropdownRefs.current['experience'] = el }}>
+          <button 
+            className={`${styles.dropdownButton} ${activeDropdown === 'experience' ? styles.active : ''} ${filters.experience ? styles.activeFilter : ''}`}
+            onClick={() => toggleDropdown('experience')}
+          >
+            {getFilterLabel('experience', filters.experience)}
+            {filters.experience && (
+              <button className={styles.clearButton} onClick={(e) => { e.stopPropagation(); clearFilter('experience'); }}>
+                ×
+              </button>
+            )}
+          </button>
+          <div className={`${styles.dropdownContent} ${activeDropdown === 'experience' ? styles.active : ''}`}>
+            {["", "15", "10-15", "5-10", "3-5", "1-3", "0-1"].map((exp) => (
+              <div key={exp} className={styles.filterOption}>
+                <input
+                  type="radio"
+                  id={`exp-${exp}`}
+                  name="experience"
+                  value={exp}
+                  checked={filters.experience === exp}
+                  onChange={() => handleFilterChange("experience", exp)}
+                />
+                <label htmlFor={`exp-${exp}`}>
+                  {exp ? `${exp} years` : "Show all"}
+                </label>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* Gender Dropdown */}
+        <div className={styles.filterDropdown} ref={(el) => { dropdownRefs.current['gender'] = el }}>
+          <button 
+            className={`${styles.dropdownButton} ${activeDropdown === 'gender' ? styles.active : ''} ${filters.gender ? styles.activeFilter : ''}`}
+            onClick={() => toggleDropdown('gender')}
+          >
+            {getFilterLabel('gender', filters.gender)}
+            {filters.gender && (
+              <button className={styles.clearButton} onClick={(e) => { e.stopPropagation(); clearFilter('gender'); }}>
+                ×
+              </button>
+            )}
+          </button>
+          <div className={`${styles.dropdownContent} ${activeDropdown === 'gender' ? styles.active : ''}`}>
+            {["", "Male", "Female"].map((g) => (
+              <div key={g} className={styles.filterOption}>
+                <input
+                  type="radio"
+                  id={`gender-${g}`}
+                  name="gender"
+                  value={g}
+                  checked={filters.gender === g}
+                  onChange={() => handleFilterChange("gender", g)}
+                />
+                <label htmlFor={`gender-${g}`}>
+                  {g || "Show all"}
+                </label>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+
       <div className={styles.content}>
+        {/* Desktop Sidebar */}
         <aside className={styles.sidebar}>
           <div className={styles.filterHeader}>
             <div className={styles.filterTitle}>
@@ -127,51 +287,60 @@ const DoctorsPage = () => {
             </div>
           </div>
 
-          <div>
+          <div className={styles.filterSection}>
             <h4>Rating</h4>
             {["", "1", "2", "3", "4", "5"].map((r) => (
-              <label key={r}>
+              <div key={r} className={styles.filterOption}>
                 <input
                   type="radio"
-                  name="rating"
+                  id={`rating-desktop-${r}`}
+                  name="rating-desktop"
                   value={r}
                   checked={pendingFilters.rating === r}
                   onChange={() => handlePendingFilterChange("rating", r)}
                 />
-                {r ? `${r} star` : "Show all"}
-              </label>
+                <label htmlFor={`rating-desktop-${r}`}>
+                  {r ? `${r} star${r === '1' ? '' : 's'}` : "Show all"}
+                </label>
+              </div>
             ))}
           </div>
 
-          <div>
+          <div className={styles.filterSection}>
             <h4>Experience</h4>
             {["", "15", "10-15", "5-10", "3-5", "1-3", "0-1"].map((exp) => (
-              <label key={exp}>
+              <div key={exp} className={styles.filterOption}>
                 <input
                   type="radio"
-                  name="experience"
+                  id={`exp-desktop-${exp}`}
+                  name="experience-desktop"
                   value={exp}
                   checked={pendingFilters.experience === exp}
                   onChange={() => handlePendingFilterChange("experience", exp)}
                 />
-                {exp ? `${exp} years` : "Show all"}
-              </label>
+                <label htmlFor={`exp-desktop-${exp}`}>
+                  {exp ? `${exp} years` : "Show all"}
+                </label>
+              </div>
             ))}
           </div>
 
-          <div>
+          <div className={styles.filterSection}>
             <h4>Gender</h4>
             {["", "Male", "Female"].map((g) => (
-              <label key={g}>
+              <div key={g} className={styles.filterOption}>
                 <input
                   type="radio"
-                  name="gender"
+                  id={`gender-desktop-${g}`}
+                  name="gender-desktop"
                   value={g}
                   checked={pendingFilters.gender === g}
                   onChange={() => handlePendingFilterChange("gender", g)}
                 />
-                {g || "Show all"}
-              </label>
+                <label htmlFor={`gender-desktop-${g}`}>
+                  {g || "Show all"}
+                </label>
+              </div>
             ))}
           </div>
         </aside>
@@ -227,36 +396,83 @@ const DoctorsPage = () => {
         </section>
       </div>
 
-      <div className={styles.pagination}>
-        <button
-          onClick={() => setPage((p) => Math.max(1, p - 1))}
-          disabled={page === 1}
-        >
-          &lt; Prev
-        </button>
-
-        {Array.from(
-          { length: Math.min(totalPages, 5) },
-          (_, index) => index + 1
-        ).map((p) => (
+      {/* Show pagination only when not showing top-rated doctors */}
+      {!isTopRated && doctors.length > 0 && (
+        <div className={styles.pagination}>
           <button
-            key={p}
-            onClick={() => setPage(p)}
-            className={page === p ? styles.active : ""}
+            onClick={() => setPage((p) => Math.max(1, p - 1))}
+            disabled={page === 1}
+            className={styles.pageButton}
           >
-            {p}
+            &lt; Prev
           </button>
-        ))}
 
-        {totalPages > 5 && <span>...</span>}
+          {totalPages <= 5 ? (
+            // If 5 or fewer pages, show all page numbers
+            Array.from({ length: totalPages }, (_, i) => i + 1).map((pageNum) => (
+              <button
+                key={pageNum}
+                className={`${styles.pageButton} ${pageNum === page ? styles.active : ''}`}
+                onClick={() => setPage(pageNum)}
+              >
+                {pageNum}
+              </button>
+            ))
+          ) : (
+            // If more than 5 pages, show current page with neighbors and ellipsis
+            <>
+              {page > 2 && (
+                <button
+                  className={styles.pageButton}
+                  onClick={() => setPage(1)}
+                >
+                  1
+                </button>
+              )}
+              
+              {page > 3 && <span className={styles.ellipsis}>...</span>}
 
-        <button
-          onClick={() => setPage((p) => Math.min(totalPages, p + 1))}
-          disabled={page === totalPages}
-        >
-          Next &gt;
-        </button>
-      </div>
+              {Array.from({ length: 5 }, (_, i) => {
+                const pageNum = Math.max(
+                  Math.min(
+                    page - 2 + i,
+                    totalPages - 2
+                  ),
+                  Math.max(3, page - 2)
+                );
+                return pageNum <= totalPages - 2 ? (
+                  <button
+                    key={pageNum}
+                    className={`${styles.pageButton} ${pageNum === page ? styles.active : ''}`}
+                    onClick={() => setPage(pageNum)}
+                  >
+                    {pageNum}
+                  </button>
+                ) : null;
+              })}
+
+              {page < totalPages - 2 && <span className={styles.ellipsis}>...</span>}
+              
+              {page < totalPages - 1 && (
+                <button
+                  className={styles.pageButton}
+                  onClick={() => setPage(totalPages)}
+                >
+                  {totalPages}
+                </button>
+              )}
+            </>
+          )}
+
+          <button
+            onClick={() => setPage((p) => Math.min(totalPages, p + 1))}
+            disabled={page === totalPages}
+            className={styles.pageButton}
+          >
+            Next &gt;
+          </button>
+        </div>
+      )}
     </div>
   );
 };

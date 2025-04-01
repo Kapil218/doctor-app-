@@ -5,101 +5,120 @@
   padding: 24px;
 }
 
+.searchWrapper {
+  position: relative;
+  width: 100vw;
+  left: 50%;
+  right: 50%;
+  margin-left: -50vw;
+  margin-right: -50vw;
+  background: white;
+  padding: 2rem 0;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+}
+
 .searchBar {
   display: flex;
   justify-content: center;
-  margin: 2rem auto;
+  margin: 0 auto;
   padding: 0 1rem;
-  max-width: 800px;
-  position: relative;
-}
-
-.searchBar::after {
-  content: '';
-  position: absolute;
-  bottom: -20px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 90%;
-  height: 2px;
-  background: linear-gradient(
-    90deg,
-    transparent,
-    rgba(0, 0, 0, 0.15) 50%,
-    transparent
-  );
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
-
-.searchBar input {
   width: 100%;
-  padding: 1rem 1rem 1rem 2.5rem;
-  border: 1px solid #e5e5e5;
-  border-radius: 8px;
-  font-size: 1rem;
   position: relative;
-  background: white;
+  max-width: 1200px;
 }
 
 .searchContainer {
   position: relative;
   width: 100%;
+  max-width: 800px;
   display: flex;
   align-items: center;
 }
 
+.searchBar input {
+  width: 100%;
+  padding: 1.25rem 1rem 1.25rem 3rem;
+  border: 1px solid #e5e5e5;
+  border-radius: 12px;
+  font-size: 1.1rem;
+  position: relative;
+  background: white;
+  transition: all 0.3s ease;
+}
+
+.searchBar input:focus {
+  outline: none;
+  border-color: #0b4d0b;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12);
+}
+
+.searchBar input::placeholder {
+  color: #999;
+}
+
 .searchIcon {
   position: absolute;
-  left: 0.75rem;
+  left: 1rem;
   color: #666;
-  width: 20px;
-  height: 20px;
+  width: 24px;
+  height: 24px;
   pointer-events: none;
+  z-index: 1;
 }
 
 .searchButton {
   position: absolute;
   right: 4px;
-  padding: 0.75rem 1.5rem;
+  top: 50%;
+  transform: translateY(-50%);
+  padding: 0.875rem 1.75rem;
   background: #0b4d0b;
   color: white;
   border: none;
-  border-radius: 6px;
+  border-radius: 8px;
   cursor: pointer;
-  font-size: 0.875rem;
-  transition: background-color 0.2s;
+  font-size: 1rem;
+  font-weight: 500;
+  transition: all 0.2s ease;
 }
 
 .searchButton:hover {
   background: #094209;
+  transform: translateY(-50%) translateX(-2px);
+}
+
+.mainTitle {
+  text-align: center;
+  font-size:2rem;
+  font-weight: 500;
+  color: #1a1a1a;
+  margin: 2.5rem 0 3rem;
+  padding: 0 1rem;
 }
 
 .header {
   text-align: center;
-  font-size: clamp(1.5rem, 4vw, 2rem);
+  font-size: 1.75rem;
   margin-bottom: 5px;
   padding: 0 1rem;
-}
-
-.mainHeader {
-  text-align: center;
-  font-size: 1.75rem;
-  font-weight: 500;
-  margin-bottom: 0.5rem;
   color: #1a1a1a;
+  font-weight: 500;
 }
 
 .subHeader {
   text-align: center;
   color: #666;
-  font-size: 0.875rem;
+  font-size: 0.95rem;
   margin-bottom: 2rem;
+  padding: 0 1rem;
+  line-height: 1.5;
 }
 
 .content {
   display: flex;
   flex-direction: row;
   gap: 2rem;
+  padding: 0 1rem;
 }
 
 /* Sidebar Responsive Styles */
@@ -109,6 +128,7 @@
   background: rgba(251, 251, 251, 1);
   border-radius: 8px;
   height: fit-content;
+  transition: all 0.3s ease;
 }
 
 .filterHeader {
@@ -124,7 +144,8 @@
   gap: 4px;
 }
 
-.filterTitle h3, .filterTitle span {
+.filterTitle h3,
+.filterTitle span {
   font-size: 1rem;
   color: #1a1a1a;
   margin: 0;
@@ -135,7 +156,8 @@
   gap: 8px;
 }
 
-.resetButton, .applyButton {
+.resetButton,
+.applyButton {
   font-size: 0.875rem;
   cursor: pointer;
 }
@@ -189,16 +211,48 @@
 @media (max-width: 768px) {
   .content {
     flex-direction: column;
+    padding: 0 0.5rem;
+    gap: 1.5rem;
   }
 
   .sidebar {
     width: 100%;
-    margin-bottom: 1.5rem;
+    margin-bottom: 1rem;
   }
-  
+
   .filterSection {
     margin-bottom: 1rem;
     padding-bottom: 1rem;
+  }
+
+  .mainTitle {
+    margin: 2rem 0 2.5rem;
+    font-size: clamp(1.75rem, 4vw, 2rem);
+  }
+
+  .subHeader {
+    font-size: 0.875rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .searchWrapper {
+    padding: 1.5rem 0;
+  }
+}
+
+@media (max-width: 480px) {
+  .mainTitle {
+    margin: 1.5rem 0 2rem;
+    font-size: clamp(1.5rem, 4vw, 1.75rem);
+  }
+
+  .subHeader {
+    font-size: 0.85rem;
+    margin-bottom: 1.25rem;
+  }
+
+  .searchWrapper {
+    padding: 1rem 0;
   }
 }
 
@@ -224,56 +278,62 @@
   cursor: pointer;
 }
 
-/* Doctors Grid Responsive */
+/* Doctors Grid */
 .doctorsGrid {
   display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+  flex: 1;
   width: 100%;
-  padding: 1rem;
-  gap: 2rem;
-  /* Default for mobile */
-  grid-template-columns: 1fr;
+  align-items: start;
 }
 
-/* Tablet view */
-@media (min-width: 768px) {
-  .doctorsGrid {
-    grid-template-columns: repeat(2, 1fr);
-  }
-}
-
-/* Laptop and larger displays */
-@media (min-width: 1024px) {
-  .doctorsGrid {
-    grid-template-columns: repeat(3, 1fr);
-  }
-}
-
-/* Doctor Card Responsive */
+/* Doctor Card */
 .doctorCard {
-  background-color: white;
-  border-radius: 16px;
+  background: white;
+  border-radius: 12px;
   padding: 1.5rem;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
-  width: 100%;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
   display: flex;
   flex-direction: column;
   align-items: center;
   text-align: center;
+  height: fit-content;
+  min-height: 340px;
+  justify-content: flex-start;
+  gap: 0.75rem;
+}
+
+.doctorCard:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
 }
 
 .doctorImage {
   width: 100px;
   height: 100px;
-  border-radius: 9999px;
+  border-radius: 50%;
   object-fit: cover;
-  margin-bottom: 1rem;
+  margin-bottom: 0.5rem;
+  cursor: pointer;
+  border: 2px solid #e0e0e0;
+  background: #f5f5f5;
 }
 
 .doctorName {
-  font-size: 1.125rem;
-  font-weight: 500;
+  font-size: 1.1rem;
+  font-weight: 600;
   color: #1a1a1a;
-  margin-bottom: 0.75rem;
+  margin: 0;
+  line-height: 1.4;
+  min-height: auto;
+  max-height: 3em;
+  display: -webkit-box;
+
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .specialtyInfo {
@@ -281,45 +341,57 @@
   align-items: center;
   justify-content: center;
   gap: 0.5rem;
-  color: #666;
-  margin-bottom: 0.75rem;
-  font-size: 0.875rem;
+  color: #1c4a2a;
+  font-size: 0.9rem;
+  margin: 0;
+  flex-wrap: wrap;
 }
 
-.specialtyIcon {
+.experienceText {
   color: #666;
+  font-size: 0.9rem;
+  margin: 0.25rem 0;
+  min-height: 1.5em;
 }
 
 .ratingsContainer {
-  margin-bottom: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.25rem;
+  margin: 0;
 }
 
 .ratingText {
   color: #666;
-  font-size: 0.875rem;
-  margin-bottom: 0.25rem;
+  font-size: 0.9rem;
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
 }
 
 .starRating {
-  color: #f59e0b;
-  font-size: 0.875rem;
+  color: #FFB800;
+  font-size: 1rem;
 }
 
 .bookButton {
-  width: 100%;
-  background-color: white;
-  color: #1a1a1a;
-  padding: 0.75rem;
-  border-radius: 8px;
-  border: 1px solid #e5e5e5;
-  font-size: 0.875rem;
+  background: #0b4d0b;
+  color: white;
+  border: none;
+  padding: 0.75rem 1rem;
+  border-radius: 6px;
+  font-size: 0.9rem;
   font-weight: 500;
   cursor: pointer;
   transition: background-color 0.2s;
+  width: 100%;
+  margin-top: auto;
+  text-align: center;
 }
 
 .bookButton:hover {
-  background-color: #f5f5f5;
+  background: #094209;
 }
 
 /* Pagination Responsive */
@@ -327,28 +399,492 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-top: 2rem;
-  flex-wrap: wrap;
   gap: 0.5rem;
-  padding: 1rem;
+  margin: 2rem 0;
+  flex-wrap: wrap;
 }
 
-.pagination button {
+.pageButton {
   padding: 0.5rem 1rem;
-  border: 1px solid #ddd;
+  border: 1px solid #e0e0e0;
   background: white;
+  color: #333;
+  border-radius: 4px;
   cursor: pointer;
-  border-radius: 5px;
+  font-size: 0.9rem;
+  min-width: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
 }
 
-.pagination .active {
+.pageButton:hover:not(:disabled) {
+  background: #f5f5f5;
+  border-color: #d0d0d0;
+}
+
+.pageButton:disabled {
+  background: #f5f5f5;
+  color: #999;
+  cursor: not-allowed;
+}
+
+.pageButton.active {
   background: #0b4d0b;
   color: white;
+  border-color: #0b4d0b;
+}
+
+.ellipsis {
+  color: #666;
+  padding: 0.5rem;
+  user-select: none;
+}
+
+@media (max-width: 768px) {
+  .pagination {
+    gap: 0.25rem;
+    margin: 1.5rem 0;
+  }
+
+  .pageButton {
+    padding: 0.4rem 0.75rem;
+    min-width: 36px;
+    font-size: 0.85rem;
+  }
 }
 
 @media (max-width: 480px) {
-  .pagination button {
-    padding: 0.375rem 0.75rem;
-    font-size: 0.875rem;
+  .pagination {
+    gap: 0.2rem;
+    margin: 1rem 0;
+  }
+
+  .pageButton {
+    padding: 0.35rem 0.6rem;
+    min-width: 32px;
+    font-size: 0.8rem;
+  }
+}
+
+/* Responsive Breakpoints */
+@media (max-width: 1200px) {
+  .doctorsGrid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.25rem;
+  }
+
+  .doctorCard {
+    padding: 1.25rem;
+  }
+}
+
+@media (max-width: 1024px) {
+  .doctorsGrid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+  }
+
+  .content {
+    padding: 0 0.75rem;
+  }
+
+  .doctorCard {
+    min-height: 320px;
+    padding: 1.25rem;
+  }
+
+  .doctorImage {
+    width: 90px;
+    height: 90px;
+  }
+
+  .doctorName {
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .doctorsGrid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+  }
+
+  .doctorCard {
+    min-height: 300px;
+    padding: 1rem;
+  }
+
+  .doctorImage {
+    width: 80px;
+    height: 80px;
+    margin-bottom: 1rem;
+  }
+
+  .doctorName {
+    font-size: 0.95rem;
+    min-height: 2.5em;
+  }
+
+  .specialtyInfo {
+    font-size: 0.85rem;
+  }
+
+  .experienceText {
+    font-size: 0.85rem;
+  }
+
+  .ratingsContainer {
+    margin: 0.5rem 0;
+  }
+
+  .bookButton {
+    padding: 0.6rem 1rem;
+    font-size: 0.85rem;
+  }
+}
+
+@media (max-width: 600px) {
+  .doctorsGrid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+    max-width: 400px;
+    margin: 0 auto;
+  }
+
+  .doctorCard {
+    min-height: auto;
+    padding: 1rem;
+  }
+
+  .content {
+    padding: 0 0.5rem;
+  }
+
+  .doctorImage {
+    width: 70px;
+    height: 70px;
+    margin-bottom: 0.75rem;
+  }
+
+  .doctorName {
+    font-size: 0.9rem;
+    min-height: 2.2em;
+  }
+
+  .specialtyInfo,
+  .experienceText,
+  .ratingText {
+    font-size: 0.8rem;
+  }
+
+  .bookButton {
+    margin-top: 0.75rem;
+    padding: 0.5rem 0.75rem;
+  }
+}
+
+/* Container max-width adjustments */
+@media (min-width: 1400px) {
+  .container {
+    max-width: 1300px;
+  }
+}
+
+@media (min-width: 1600px) {
+  .container {
+    max-width: 1400px;
+  }
+  
+  .doctorsGrid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+/* Mobile Filter Dropdown */
+.mobileFilterButton {
+  display: none;
+  width: 100%;
+  padding: 0.75rem 1rem;
+  background: white;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  font-size: 0.95rem;
+  color: #1a1a1a;
+  cursor: pointer;
+  margin-bottom: 1rem;
+  text-align: left;
+  position: relative;
+}
+
+.mobileFilterButton::after {
+  content: '';
+  position: absolute;
+  right: 1rem;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 0;
+  height: 0;
+  border-left: 5px solid transparent;
+  border-right: 5px solid transparent;
+  border-top: 5px solid #1a1a1a;
+  transition: transform 0.2s ease;
+}
+
+.mobileFilterButton.active::after {
+  transform: translateY(-50%) rotate(180deg);
+}
+
+/* Sidebar Responsive Styles */
+.sidebar {
+  width: 300px;
+  padding: 1.5rem;
+  background: rgba(251, 251, 251, 1);
+  border-radius: 8px;
+  height: fit-content;
+  transition: all 0.3s ease;
+}
+
+@media (max-width: 768px) {
+  .mobileFilterButton {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .mobileFilterButton svg {
+    width: 20px;
+    height: 20px;
+  }
+
+  .content {
+    flex-direction: column;
+    padding: 0 0.5rem;
+    gap: 1rem;
+  }
+
+  .sidebar {
+    width: 100%;
+    margin-bottom: 1rem;
+    padding: 0;
+    background: transparent;
+    overflow: hidden;
+    max-height: 0;
+  }
+
+  .sidebar.active {
+    max-height: 1000px;
+    padding: 1rem;
+    background: white;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    margin-bottom: 1rem;
+  }
+
+  .filterSection {
+    margin-bottom: 1rem;
+    padding-bottom: 1rem;
+  }
+
+  .filterOption {
+    padding: 0.5rem 0;
+  }
+
+  .filterOption label {
+    font-size: 0.9rem;
+  }
+
+  /* Improve radio button styling for touch */
+  .filterOption input[type="radio"] {
+    width: 18px;
+    height: 18px;
+    margin-right: 0.75rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .mobileFilterButton {
+    font-size: 0.9rem;
+    padding: 0.6rem 0.75rem;
+  }
+
+  .sidebar.active {
+    padding: 0.75rem;
+  }
+
+  .filterSection h4 {
+    font-size: 0.85rem;
+  }
+
+  .filterOption label {
+    font-size: 0.85rem;
+  }
+
+  .filterOption input[type="radio"] {
+    width: 16px;
+    height: 16px;
+    margin-right: 0.5rem;
+  }
+}
+
+/* Filter Dropdowns Container */
+.filterDropdowns {
+  display: none;
+}
+
+/* Show dropdowns only on mobile and tablet */
+@media (max-width: 768px) {
+  .filterDropdowns {
+    display: flex;
+    gap: 0.75rem;
+    margin-bottom: 1.5rem;
+    flex-wrap: wrap;
+  }
+
+  .filterDropdown {
+    position: relative;
+    min-width: calc(50% - 0.375rem);
+  }
+
+  .dropdownButton {
+    width: 100%;
+    padding: 0.6rem 0.75rem;
+    background: white;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    font-size: 0.9rem;
+    color: #1a1a1a;
+    cursor: pointer;
+    text-align: left;
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: border-color 0.2s ease;
+  }
+
+  .dropdownButton:hover {
+    border-color: #0b4d0b;
+  }
+
+  .dropdownButton::after {
+    content: '';
+    width: 0;
+    height: 0;
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+    border-top: 5px solid #1a1a1a;
+    transition: transform 0.2s ease;
+  }
+
+  .dropdownButton.active::after {
+    transform: rotate(180deg);
+  }
+
+  .dropdownContent {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background: white;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    margin-top: 0.5rem;
+    padding: 0.5rem;
+    z-index: 100;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    display: none;
+    max-height: 300px;
+    overflow-y: auto;
+  }
+
+  .dropdownContent.active {
+    display: block;
+  }
+
+  .filterOption {
+    padding: 0.5rem;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    border-radius: 4px;
+    transition: background-color 0.2s ease;
+  }
+
+  .filterOption:hover {
+    background-color: rgba(11, 77, 11, 0.05);
+  }
+
+  .filterOption input[type="radio"] {
+    margin-right: 0.75rem;
+    width: 16px;
+    height: 16px;
+    cursor: pointer;
+  }
+
+  .filterOption label {
+    font-size: 0.85rem;
+    color: #1a1a1a;
+    cursor: pointer;
+    flex: 1;
+  }
+
+  .activeFilter {
+    color: #0b4d0b;
+    font-weight: 500;
+  }
+
+  .clearButton {
+    background: none;
+    border: none;
+    padding: 0;
+    color: #666;
+    font-size: 0.85rem;
+    cursor: pointer;
+    margin-left: 0.5rem;
+  }
+
+  .clearButton:hover {
+    color: #1a1a1a;
+  }
+
+  /* Hide sidebar on mobile and tablet */
+  .sidebar {
+    display: none;
+  }
+}
+
+@media (max-width: 480px) {
+  .filterDropdowns {
+    gap: 0.5rem;
+  }
+
+  .filterDropdown {
+    min-width: 100%;
+  }
+
+  .dropdownButton {
+    padding: 0.5rem 0.75rem;
+    font-size: 0.85rem;
+  }
+}
+
+/* Show sidebar only on desktop */
+@media (min-width: 769px) {
+  .sidebar {
+    display: block;
+    width: 300px;
+    padding: 1.5rem;
+    background: rgba(251, 251, 251, 1);
+    border-radius: 8px;
+    height: fit-content;
+  }
+
+  .content {
+    display: flex;
+    flex-direction: row;
+    gap: 2rem;
+    padding: 0 1rem;
   }
 }

@@ -15,7 +15,6 @@
 }
 
 .title {
-  font-family: 'Montserrat', sans-serif;
   font-size: 64px;
   font-weight: 600;
   color: white;
@@ -24,7 +23,6 @@
 }
 
 .description {
-  font-family: 'Montserrat', sans-serif;
   font-size: 18px;
   color: rgba(255, 255, 255, 0.9);
   line-height: 1.6;
@@ -33,7 +31,6 @@
 }
 
 .getStartedButton {
-  font-family: 'Montserrat', sans-serif;
   background-color: white;
   color: rgba(28, 74, 42, 1);
   border: none;
@@ -55,6 +52,7 @@
   width: 50%;
   position: relative;
   overflow: hidden;
+  height: 100%;
 }
 
 .heroImage img {
@@ -67,23 +65,73 @@
   .container {
     flex-direction: column;
     height: auto;
+    min-height: calc(100vh - 88px);
   }
 
   .heroText {
+    justify-content: start;
     width: 100%;
-    padding: 40px 20px;
+    padding: 50px 30px;
   }
 
   .heroImage {
     width: 100%;
-    height: 400px;
+    height: 50vh;
   }
 
   .title {
-    font-size: 40px;
+    font-size: 42px;
+    margin-bottom: 20px;
   }
 
   .description {
     font-size: 16px;
+    max-width: 600px;
+    margin-bottom: 25px ;
   }
-} 
+}
+
+/* Mobile Styles */
+@media (max-width: 768px) {
+  .heroText {
+    padding: 40px 20px;
+  }
+  
+  .title {
+    font-size: 36px;
+    margin-bottom: 16px;
+  }
+  
+  .description {
+    font-size: 15px;
+    line-height: 1.5;
+    margin-bottom: 25px;
+  }
+  
+  .getStartedButton {
+    padding: 14px 28px;
+    font-size: 15px;
+  }
+}
+
+/* Small Mobile Styles */
+@media (max-width: 480px) {
+  .heroText {
+    padding: 30px 15px;
+  }
+  
+  .title {
+    font-size: 30px;
+    margin-bottom: 14px;
+  }
+  
+  .description {
+    font-size: 14px;
+    margin-bottom: 20px;
+  }
+  
+  .getStartedButton {
+    padding: 12px 24px;
+    font-size: 14px;
+  }
+}

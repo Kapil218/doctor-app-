@@ -1,40 +1,59 @@
-:root {
-  --background: #1a1a1a;
-  --foreground: #ffffff;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
-
-html,
 body {
-  max-width: 100vw;
-  margin: 0;
+  font-family: var(--font-montserrat), sans-serif;
   padding: 0;
-  background-color: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  margin: 0;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+.main_layout {
+  padding-top: 80px; /* Height of header */
+  min-height: calc(100vh - 80px);
+  width: 100%;
 }
 
 * {
   box-sizing: border-box;
-  padding: 0;
-  margin: 0;
+}
+/* html {
+  scrollbar-gutter: stable;
+} */
+/* Page wrapper ensures smooth transitions */
+
+/* Initially hide the page */
+/* Initial fade-in animation */
+.fade-in {
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeInAnimation 0.8s ease-in-out forwards;
 }
 
-a {
-  color: inherit;
-  text-decoration: none;
-}
-
-@media (prefers-color-scheme: dark) {
-  html {
-    color-scheme: dark;
+/* Keyframes for smooth fade-in effect */
+@keyframes fadeInAnimation {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
   }
 }
+
+/* 🔹 Add a loading overlay while waiting for page */
+.loading-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.2); /* 🔹 Dim background */
+  backdrop-filter: blur(5px); /* 🔹 Slight blur effect */
+  z-index: 10;
+}
+
+/* Remove these as they conflict with the new structure */
+/* main {
+  height: calc(100vh - 88px);
+  overflow: hidden;
+} */

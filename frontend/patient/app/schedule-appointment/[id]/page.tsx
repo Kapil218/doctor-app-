@@ -2,7 +2,7 @@
 
 import style from "./schedule-appointment.module.css";
 import React from "react";
-import BookAppointment from '../../../components/bookAppointment/page'
+import BookAppointment from "@/components/bookAppointment/page";
 import Footer from "@/components/footer/page";
 
 export default function ScheduleAppointmentPage() {

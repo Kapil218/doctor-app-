@@ -53,11 +53,57 @@
   margin-top: 0;
   white-space: nowrap;
   font-family: 'Montserrat', sans-serif;
+  min-width: 120px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
+
 .bookButton {
   align-items: center;
   margin-top: 0;
   width: 40%;
+  max-width: 200px;
+}
+
+/* Add responsive styles for mobile */
+@media (max-width: 768px) {
+  .bookButton,
+  .nextButton {
+    padding: 10px 15px;
+    font-size: 13px;
+    min-width: 100px;
+    width: auto;
+  }
+
+  .bookButton {
+    width: auto;
+    max-width: none;
+  }
+
+  .heading_and_button {
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+}
+
+@media (max-width: 480px) {
+  .bookButton,
+  .nextButton {
+    padding: 8px 12px;
+    font-size: 12px;
+    min-width: 90px;
+  }
+
+  .heading_and_button {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .heading_and_button span {
+    font-size: 16px;
+    margin-bottom: 8px;
+  }
 }
 
 .bookButton:disabled,

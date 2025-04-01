@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect } from "react";
 import { useRouter, useParams } from "next/navigation";
-import styles from "./appointment2.module.css";
+import styles from "./bookAppointment.module.css";
 
 interface Doctor {
   name: string;
