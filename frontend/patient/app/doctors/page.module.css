@@ -1,0 +1,616 @@
+.container {
+  padding: 2rem;
+  background: #1a1a1a;
+  min-height: 100vh;
+  color: #fff;
+}
+
+.pageHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+}
+
+.pageTitle {
+  font-size: 2rem;
+  color: #fff;
+  margin: 0;
+}
+
+.addButton {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.75rem 1.5rem;
+  background-color: #3b82f6;
+  color: white;
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: 500;
+  transition: all 0.2s ease;
+  min-width: 120px;
+  justify-content: center;
+}
+
+.addButton:hover {
+  background-color: #2563eb;
+  transform: translateY(-1px);
+}
+
+.searchBar {
+  width: 100%;
+  max-width: 600px;
+  padding: 0.875rem 1rem;
+  background-color: #2d2d2d;
+  border: 1px solid #3d3d3d;
+  border-radius: 8px;
+  margin: 1.5rem 0;
+  font-size: 1rem;
+  color: #fff;
+  transition: all 0.2s ease;
+}
+
+.searchBar:focus {
+  outline: none;
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.2);
+}
+
+.searchBar::placeholder {
+  color: #6b7280;
+}
+
+.filterSection {
+  background: #1f1f1f;
+  padding: 1.5rem;
+  border-radius: 12px;
+  border: 1px solid #2d2d2d;
+  margin-bottom: 2rem;
+}
+
+.filterHeader {
+  display: flex;
+  align-items: flex-start;
+  gap: 2rem;
+  margin-bottom: 1.5rem;
+}
+
+.filterTitle {
+  font-size: 1.25rem;
+  font-weight: 500;
+  color: #fff;
+  margin: 0;
+  white-space: nowrap;
+}
+
+.filterContent {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  width: 100%;
+}
+
+.filterGroup {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  flex: 1;
+  min-width: 200px;
+}
+
+.filterGroupTitle {
+  font-size: 1rem;
+  font-weight: 500;
+  color: #fff;
+  margin: 0;
+  white-space: nowrap;
+  min-width: 80px;
+}
+
+.select {
+  flex: 1;
+  padding: 0.75rem 1rem;
+  background-color: #2d2d2d;
+  border: 1px solid #3d3d3d;
+  border-radius: 8px;
+  color: #fff;
+  font-size: 1rem;
+  cursor: pointer;
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='white'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M19 9l-7 7-7-7'%3E%3C/path%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 1rem center;
+  background-size: 1em;
+  padding-right: 2.5rem;
+  min-width: 120px;
+  transition: all 0.2s ease;
+}
+
+.select:focus {
+  outline: none;
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.2);
+}
+
+.select:hover {
+  border-color: #4d4d4d;
+}
+
+.filterActions {
+  display: flex;
+  gap: 1rem;
+  margin-left: auto;
+  align-items: center;
+}
+
+.resetButton,
+.applyButton {
+  padding: 0.75rem 1.5rem;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  min-width: 100px;
+}
+
+.resetButton {
+  background-color: #2d2d2d;
+  color: #fff;
+  border: 1px solid #3d3d3d;
+}
+
+.resetButton:hover {
+  background-color: #3d3d3d;
+  transform: translateY(-1px);
+}
+
+.applyButton {
+  background-color: #3b82f6;
+  color: white;
+}
+
+.applyButton:hover {
+  background-color: #2563eb;
+  transform: translateY(-1px);
+}
+
+/* Doctors List */
+.content {
+  width: 100%;
+  margin-bottom: 2rem;
+}
+
+.doctorsList {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem;
+  margin-bottom: 2rem;
+}
+
+.doctorCard {
+  background: #1f1f1f;
+  border-radius: 12px;
+  border: 1px solid #2d2d2d;
+  overflow: hidden;
+  transition: all 0.2s ease;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.doctorCard:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.doctorImageContainer {
+  width: 100%;
+  height: 200px;
+  position: relative;
+  background-color: #2d2d2d;
+  overflow: hidden;
+}
+
+.doctorImage {
+  object-fit: cover !important;
+  width: 100% !important;
+  height: 100% !important;
+  position: relative !important;
+  transition: transform 0.3s ease;
+}
+
+.doctorCard:hover .doctorImage {
+  transform: scale(1.05);
+}
+
+.doctorContent {
+  padding: 1.5rem;
+}
+
+.doctorInfo h3 {
+  margin: 0 0 0.5rem 0;
+  color: #fff;
+  font-size: 1.25rem;
+}
+
+.specialty {
+  color: #9ca3af;
+  margin: 0 0 1rem 0;
+  font-size: 0.95rem;
+}
+
+.experience,
+.rating,
+.location {
+  color: #9ca3af;
+  margin: 0.5rem 0;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.9rem;
+}
+
+.doctorActions {
+  display: flex;
+  gap: 0.75rem;
+  margin-top: 1.5rem;
+}
+
+.editButton,
+.scheduleButton,
+.deleteButton {
+  flex: 1;
+  padding: 0.75rem;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 500;
+  transition: all 0.2s ease;
+  text-align: center;
+  text-decoration: none;
+  font-size: 0.9rem;
+}
+
+.editButton {
+  background-color: #3b82f6;
+  color: white;
+}
+
+.editButton:hover {
+  background-color: #2563eb;
+  transform: translateY(-1px);
+}
+
+.scheduleButton {
+  background-color: #10b981;
+  color: white;
+}
+
+.scheduleButton:hover {
+  background-color: #059669;
+  transform: translateY(-1px);
+}
+
+.deleteButton {
+  background-color: #ef4444;
+  color: white;
+}
+
+.deleteButton:hover {
+  background-color: #dc2626;
+  transform: translateY(-1px);
+}
+
+.loading {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 200px;
+  color: #fff;
+  font-size: 1.2rem;
+}
+
+.error {
+  background-color: rgba(239, 68, 68, 0.1);
+  color: #ef4444;
+  padding: 1rem;
+  border-radius: 8px;
+  margin-bottom: 1rem;
+  text-align: center;
+}
+
+.noDoctors {
+  grid-column: 1 / -1;
+  text-align: center;
+  padding: 2rem;
+  background: #1f1f1f;
+  border-radius: 12px;
+  border: 1px solid #2d2d2d;
+  color: #9ca3af;
+  font-style: italic;
+}
+
+.pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: 2rem;
+  flex-wrap: wrap;
+}
+
+.paginationButton {
+  padding: 0.5rem 1rem;
+  background-color: #2d2d2d;
+  border: 1px solid #3d3d3d;
+  color: #fff;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  min-width: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.paginationButton:hover:not(:disabled) {
+  background-color: #3d3d3d;
+  transform: translateY(-1px);
+}
+
+.paginationButton:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.paginationButton.active {
+  background-color: #3b82f6;
+  border-color: #3b82f6;
+  color: white;
+}
+
+.paginationEllipsis {
+  color: #9ca3af;
+  padding: 0.5rem;
+}
+
+.paginationNav {
+  font-size: 1.2rem;
+  padding: 0.5rem;
+}
+
+.paginationNav:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+@media (max-width: 1200px) {
+  .doctorsList {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .doctorsList {
+    grid-template-columns: 1fr;
+  }
+
+  .container {
+    padding: 1rem;
+  }
+
+  .pageHeader {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 1rem;
+    margin-bottom: 1.25rem;
+  }
+
+  .pageTitle {
+    font-size: 1.5rem;
+    text-align: left;
+    margin-bottom: 0.5rem;
+  }
+
+  .addButton {
+    width: 100%;
+    padding: 0.875rem;
+    font-size: 1rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .searchBar {
+    max-width: 100%;
+    margin: 0.5rem 0 1.25rem 0;
+    padding: 0.875rem;
+  }
+
+  .filterSection {
+    padding: 1.25rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .filterHeader {
+    flex-direction: column;
+    gap: 1.25rem;
+  }
+
+  .filterTitle {
+    font-size: 1.1rem;
+  }
+
+  .filterContent {
+    flex-direction: column;
+    gap: 1.25rem;
+  }
+
+  .filterGroup {
+    flex-direction: column;
+    align-items: flex-start;
+    width: 100%;
+    min-width: 0;
+    gap: 0.75rem;
+  }
+
+  .filterGroupTitle {
+    font-size: 0.95rem;
+    min-width: 0;
+  }
+
+  .select {
+    width: 100%;
+    min-width: 0;
+    padding: 0.875rem;
+    font-size: 0.95rem;
+  }
+
+  .filterActions {
+    flex-direction: row;
+    justify-content: stretch;
+    width: 100%;
+    margin: 1.25rem 0 0 0;
+    gap: 1rem;
+  }
+
+  .resetButton,
+  .applyButton {
+    flex: 1;
+    min-width: 0;
+    padding: 0.875rem;
+    font-size: 0.95rem;
+  }
+
+  .doctorCard {
+    max-width: 100%;
+  }
+}
+
+@media (max-width: 480px) {
+  .container {
+    padding: 0.75rem;
+  }
+
+  .pageHeader {
+    gap: 0.75rem;
+    margin-bottom: 1rem;
+  }
+
+  .pageTitle {
+    font-size: 1.25rem;
+  }
+
+  .addButton {
+    padding: 0.75rem;
+    font-size: 0.95rem;
+    margin-bottom: 0.25rem;
+  }
+
+  .searchBar {
+    margin: 0.25rem 0 1rem 0;
+    padding: 0.75rem;
+    font-size: 0.95rem;
+  }
+
+  .filterSection {
+    padding: 1rem;
+    margin: 0.75rem 0 1.25rem 0;
+    border-radius: 8px;
+  }
+
+  .filterHeader {
+    gap: 1rem;
+    margin-bottom: 1.25rem;
+  }
+
+  .filterTitle {
+    font-size: 1rem;
+  }
+
+  .filterContent {
+    gap: 1rem;
+  }
+
+  .filterGroup {
+    gap: 0.625rem;
+  }
+
+  .filterGroupTitle {
+    font-size: 0.9rem;
+  }
+
+  .select {
+    padding: 0.75rem;
+    font-size: 0.9rem;
+  }
+
+  .filterActions {
+    flex-direction: column;
+    margin-top: 1rem;
+    gap: 0.75rem;
+  }
+
+  .resetButton,
+  .applyButton {
+    width: 100%;
+    padding: 0.75rem;
+    font-size: 0.9rem;
+  }
+
+  .doctorsList {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+
+  .doctorImageContainer {
+    height: 180px;
+  }
+
+  .doctorContent {
+    padding: 1rem;
+  }
+
+  .doctorInfo h3 {
+    font-size: 1rem;
+    margin-bottom: 0.625rem;
+  }
+
+  .specialty {
+    font-size: 0.875rem;
+    margin-bottom: 0.75rem;
+  }
+
+  .experience,
+  .rating,
+  .location {
+    font-size: 0.8125rem;
+    margin: 0.5rem 0;
+  }
+
+  .doctorActions {
+    flex-direction: column;
+    gap: 0.625rem;
+    margin-top: 1.25rem;
+  }
+
+  .editButton,
+  .scheduleButton,
+  .deleteButton {
+    width: 100%;
+    padding: 0.75rem;
+    font-size: 0.875rem;
+  }
+
+  .pagination {
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    justify-content: center;
+  }
+
+  .paginationButton {
+    padding: 0.625rem;
+    min-width: 36px;
+    font-size: 0.875rem;
+  }
+} 

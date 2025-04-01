@@ -1,28 +1,24 @@
-import { NextResponse } from "next/server";
-import type { NextRequest } from "next/server";
+import { NextResponse } from 'next/server'
+import type { NextRequest } from 'next/server'
 
-const PUBLIC_ROUTES = ["/", "/login", "/signup"]; // Define public routes
+export function middleware(request: NextRequest) {
+  const accessToken = request.cookies.get('accessToken')?.value
+  const refreshToken = request.cookies.get('refreshToken')?.value
+  const isAuthPage = request.nextUrl.pathname.startsWith('/login')
 
-export async function middleware(req: NextRequest) {
-  const { nextUrl, cookies } = req;
-  const accessToken = cookies.get("accessToken")?.value;
-  const refreshToken = cookies.get("refreshToken")?.value;
-  // ✅ 1. Allow public routes without authentication
-  if (PUBLIC_ROUTES.includes(nextUrl.pathname)) {
-    return NextResponse.next();
+  // If no tokens and trying to access protected route
+  if ((!accessToken || !refreshToken) && !isAuthPage) {
+    return NextResponse.redirect(new URL('/login', request.url))
   }
 
-  // ✅ 2. If access token exists, allow access
-  if (accessToken || refreshToken) {
-    return NextResponse.next();
+  // If has tokens and trying to access auth pages
+  if (accessToken && refreshToken && isAuthPage) {
+    return NextResponse.redirect(new URL('/', request.url))
   }
 
-  // ❌ 3. If no valid token, redirect to login
-  return NextResponse.redirect(new URL("/login", req.url));
+  return NextResponse.next()
 }
 
-// ✅ 5. Apply middleware only to protected routes (exclude API routes)
 export const config = {
-  matcher:
-    "/((?!api|_next/static|_next/image|favicon.ico|.*\\.svg|.*\\.jpg|.*\\.png).*)",
-};
+  matcher: ['/((?!api|_next/static|_next/image|favicon.ico).*)'],
+} 
