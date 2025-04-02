@@ -14,7 +14,7 @@ export default function Header() {
 
   // Close menu when route changes
   useEffect(() => {
-    if(pathname!=="/login" && pathname!=="/signup") setShowLogout(true)
+    if(pathname!=="/login" && pathname!=="/signup" && pathname!=="/") setShowLogout(true)
       else{
         setShowLogout(false);}
     setMenuOpen(false);

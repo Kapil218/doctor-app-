@@ -35,7 +35,7 @@ export default function LoginForm() {
       const data = await response.json();
 
       if (response.ok) {
-        router.push("/"); // Redirect user after successful login
+        router.push("/appointments"); // Redirect user after successful login
       } else {
         alert(data.message || "Login failed. Please check your credentials.");
       }

@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
 
-const PUBLIC_ROUTES = ["/", "/login", "/signup"]; // Define public routes
+const PUBLIC_ROUTES = ["/", "/login", "/signup"]; 
 
 export async function middleware(req: NextRequest) {
   const { nextUrl, cookies } = req;
