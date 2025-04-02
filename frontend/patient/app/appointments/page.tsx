@@ -83,7 +83,8 @@ const DoctorsPage = () => {
 
       try {
         const res = await fetch(
-          `http://localhost:3000/api/v1/doctors?${params}`
+          `http://localhost:3000/api/v1/doctors?${params}`,
+         { credentials: 'include'}
         );
         const data = await res.json();
 
