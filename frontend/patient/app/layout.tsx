@@ -2,9 +2,8 @@
 import "./globals.css";
 import Header from "@/components/header/page";
 import { Montserrat } from "next/font/google";
-import { ReactNode } from "react";
-import { AuthProvider } from "@/context/AuthContext";
-import { useAuth } from "@/context/AuthContext";
+import { ReactNode, useState, useEffect } from "react";
+import { usePathname } from "next/navigation";
 
 const montserrat = Montserrat({
   subsets: ["latin"],
@@ -15,29 +14,22 @@ interface RootLayoutProps {
   children: ReactNode;
 }
 
-function RootLayoutContent({ children }: { children: React.ReactNode }) {
-  const { isLoggedIn } = useAuth();
-  
+export default function RootLayout({ children }: RootLayoutProps) {
+  const pathname = usePathname();
+  const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+    setLoading(true);
+    const timer = setTimeout(() => setLoading(false), 500); // Loading effect for 0.5s
+    return () => clearTimeout(timer);
+  }, [pathname]);
+
   return (
     <html lang="en">
       <body className={montserrat.className}>
-        {" "}
-        {/* Apply font class */}
         <Header />
-        <main className="main_layout">{children}</main>
+        <main>{children}</main>
       </body>
     </html>
-  );
-}
-
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
-  return (
-    <AuthProvider>
-      <RootLayoutContent>{children}</RootLayoutContent>
-    </AuthProvider>
   );
 }

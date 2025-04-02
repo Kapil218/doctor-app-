@@ -98,7 +98,6 @@ export default function LoginForm() {
             >
               Reset
             </button>
-            <p>Forgot password?</p>
           </form>
         </div>
 

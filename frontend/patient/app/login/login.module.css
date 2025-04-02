@@ -5,6 +5,8 @@
   min-height: calc(100vh - 90px);
   background: url("../../public/Hero Image.svg") center/cover no-repeat;
   padding: 20px;
+  position: relative;
+  top: 90px;
 }
 
 /* Glassmorphic Form Wrapper */
@@ -22,10 +24,10 @@
 
 /* Form Title */
 .form_wrapper h2 {
-  font-weight: 600;
+  font-weight: 500;
   color: #1c4a2a;
   text-align: left;
-  margin-bottom: 20px;
+  margin-bottom: 0px;
   font-size: 32px;
 }
 
@@ -35,7 +37,7 @@
   font-weight: 400;
   color: #6d6c6c;
   text-align: left;
-  margin-bottom: 20px;
+  margin-bottom: 10px;
 }
 
 /* "Are you a new member?" Gray text */
@@ -125,7 +127,7 @@
   display: flex;
   align-items: center;
   text-align: center;
-  margin: 20px 0;
+  margin: 15px 0;
 }
 
 .divider::before,
