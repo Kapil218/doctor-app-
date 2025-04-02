@@ -12,8 +12,8 @@ import { roleCheck } from "../middlewares/roleCheck.middleware.js";
 
 const router = Router();
 
-router.get("/", getDoctors);
-router.get("/:id", getDoctorById);
+router.get("/", authMiddleware, getDoctors);
+router.get("/:id", authMiddleware, getDoctorById);
 router.post("/add-doctor", authMiddleware, roleCheck, addDoctor);
 router.delete("/remove/:id", authMiddleware, roleCheck, deleteDoctor);
 router.patch("/update/:id", authMiddleware, roleCheck, updateDoctor);

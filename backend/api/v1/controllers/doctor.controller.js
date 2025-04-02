@@ -92,7 +92,6 @@ const getDoctors = asyncHandler(async (req, res, _) => {
     ORDER BY rating DESC 
     LIMIT $${count} OFFSET $${count + 1}
   `;
-  console.log(finalQuery);
 
   const result = await pool.query(finalQuery, values);
 
