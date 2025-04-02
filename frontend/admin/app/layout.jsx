@@ -1,8 +1,7 @@
-import { Suspense } from 'react';
-import Sidebar from '../components/Sidebar';
 import './globals.css';
 import styles from './layout.module.css';
 import { Montserrat } from "next/font/google";
+import LayoutWrapper from '../components/LayoutWrapper';
 
 const montserrat = Montserrat({
   subsets: ["latin"],
@@ -18,14 +17,9 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body className={montserrat.className}>
-        <div className={styles.layout}>
-          <Suspense fallback={<div>Loading...</div>}>
-            <Sidebar />
-          </Suspense>
-          <main className={styles.main}>
-            {children}
-          </main>
-        </div>
+        <LayoutWrapper>
+          {children}
+        </LayoutWrapper>
       </body>
     </html>
   );
