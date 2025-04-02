@@ -3,6 +3,7 @@ import { pool } from "../../db/index.js";
 import ApiResponse from "../utils/apiResponse.js";
 import ApiError from "../utils/apiError.js";
 
+// pending reviews of user
 const pendingReviewsOfUsers = asyncHandler(async (req, res, next) => {
   try {
     const patient_id = req.user.id;
@@ -36,6 +37,7 @@ const pendingReviewsOfUsers = asyncHandler(async (req, res, next) => {
   }
 });
 
+// user's review history
 const reviewHistoryOfUser = asyncHandler(async (req, res) => {
   const patient_id = req.user.id;
 
@@ -59,6 +61,7 @@ const reviewHistoryOfUser = asyncHandler(async (req, res) => {
     .json(new ApiResponse(200, reviews.rows, "Reviews fetched successfully"));
 });
 
+// add review
 const addReview = asyncHandler(async (req, res) => {
   const { doctor_id, appointment_id, review, rating } = req.body;
   const patient_id = req.user.id;
@@ -127,6 +130,7 @@ const addReview = asyncHandler(async (req, res) => {
     .json(new ApiResponse(201, newReview.rows[0], "Review added successfully"));
 });
 
+// doctor's review
 const getDoctorReviews = asyncHandler(async (req, res) => {
   const { id } = req.params;
 

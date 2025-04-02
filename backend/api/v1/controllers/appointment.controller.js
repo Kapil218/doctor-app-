@@ -4,6 +4,7 @@ import ApiError from "../utils/apiError.js";
 import ApiResponse from "../utils/apiResponse.js";
 import { sendAppointmentEmail } from "../utils/mailService.js";
 
+// get all appointments
 const getAllAppointments = asyncHandler(async (req, res) => {
   const result = await pool.query(`
     SELECT * FROM appointments
@@ -26,6 +27,7 @@ const getAllAppointments = asyncHandler(async (req, res) => {
     );
 });
 
+// book appointments
 const bookAppointment = asyncHandler(async (req, res) => {
   const { doctor_id, appointment_time, location, consultation_type } = req.body;
 
@@ -223,6 +225,7 @@ const updateAppointmentStatus = asyncHandler(async (req, res) => {
   });
 });
 
+// get appointment by user
 const getAppointmentsByUser = asyncHandler(async (req, res) => {
   if (!req.user || !req.user.id) {
     throw new ApiError(403, "Unauthorized: User must be logged in");

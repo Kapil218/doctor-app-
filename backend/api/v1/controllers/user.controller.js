@@ -10,19 +10,16 @@ import { pool } from "../../db/index.js";
 import { hashValue, compareValue } from "../utils/bcrypt.js";
 import passport from "passport";
 
-// --------------------------------------------------------------------------------------------------------------------------------------
-// REGISTER
-// ----------------------------------------------------------------------------------------------------------------------------------------------
-
+// register
 const registerUser = asyncHandler(async (req, res) => {
   const name = (req.body.name || "").trim();
   const email = (req.body.email || "").trim().toLowerCase();
   const password = (req.body.password || "").trim();
-  // Assigning role
 
   if ([name, email, password].some((field) => field === "")) {
     throw new ApiError(400, "All fields are required");
   }
+  // assign role
   const role = email === "admin@tothenew.com" ? "admin" : "user";
 
   const userExists = await pool.query("SELECT * FROM users WHERE email = $1", [
@@ -47,9 +44,7 @@ const registerUser = asyncHandler(async (req, res) => {
     .json(new ApiResponse(201, newUser.rows[0], "User created successfully"));
 });
 
-// ----------------------------------------------------------------------------------------------------------------------------------------------
-// LOGIN
-// --------------------------------------------------------------------------------------------------------------------------------------------
+// login
 const loginWithGoogle = asyncHandler(async (req, res, next) => {
   passport.authenticate("google", {
     scope: ["email", "profile"],
@@ -183,10 +178,7 @@ const loginUser = asyncHandler(async (req, res, _) => {
     );
 });
 
-//----------------------------------------------------------------------------------------------------------------------------------------------
-// LOGOUT
-//----------------------------------------------------------------------------------------------------------------------------------------------
-
+// logout
 const logoutUser = asyncHandler(async (req, res, _) => {
   if (!req.user?.id) {
     throw new ApiError(400, "User not authenticated");
@@ -211,10 +203,7 @@ const logoutUser = asyncHandler(async (req, res, _) => {
     .json(new ApiResponse(200, null, "Logout successful"));
 });
 
-//----------------------------------------------------------------------------------------------------------------------------------------------
-// REFRESH TOKEN
-//----------------------------------------------------------------------------------------------------------------------------------------------
-
+// refresh access and refresh token
 const refreshUserToken = asyncHandler(async (req, res, _) => {
   const incomingRefreshToken =
     req.cookies?.refreshToken || req.body?.refreshToken;
@@ -272,10 +261,7 @@ const refreshUserToken = asyncHandler(async (req, res, _) => {
     );
 });
 
-//----------------------------------------------------------------------------------------------------------------------------------------------
-// FETCH USER BY ID
-//----------------------------------------------------------------------------------------------------------------------------------------------
-
+// get user by id
 const getUserById = asyncHandler(async (req, res) => {
   const id = req.user.id;
   const userQuery = await pool.query(

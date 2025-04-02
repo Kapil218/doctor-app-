@@ -103,7 +103,7 @@ const getDoctors = asyncHandler(async (req, res, _) => {
         pagination:
           topRated !== "true"
             ? { totalDoctors, totalPages, currentPage, pageSize }
-            : undefined, // No pagination for topRated=true case
+            : undefined,
       },
       "Doctors fetched successfully"
     )
@@ -112,7 +112,7 @@ const getDoctors = asyncHandler(async (req, res, _) => {
 
 // get doctor by id
 const getDoctorById = asyncHandler(async (req, res, _) => {
-  const { id } = req.params; // Get doctor ID from request params
+  const { id } = req.params;
 
   if (!id) {
     return res
@@ -120,7 +120,6 @@ const getDoctorById = asyncHandler(async (req, res, _) => {
       .json({ success: false, message: "Doctor ID is required" });
   }
 
-  // Query to fetch a single doctor
   const query = `SELECT * FROM doctors WHERE id = $1 LIMIT 1`;
 
   try {
@@ -143,6 +142,7 @@ const getDoctorById = asyncHandler(async (req, res, _) => {
   }
 });
 
+// add doctor
 const addDoctor = asyncHandler(async (req, res, _) => {
   const name = (req.body.name || "").trim();
   const specialty = (req.body.specialty || "").trim();
@@ -287,7 +287,7 @@ const deleteDoctor = asyncHandler(async (req, res, _) => {
 // edit doctor slotes
 const editDoctorSlots = asyncHandler(async (req, res, _) => {
   const { id } = req.params;
-  const { date, slots } = req.body; // slots should be an array of time strings
+  const { date, slots } = req.body;
 
   if (!date || !Array.isArray(slots)) {
     throw new ApiError(400, "Date and slots (array) are required");
