@@ -23,7 +23,7 @@ function RootLayoutContent({ children }: { children: React.ReactNode }) {
       <body className={montserrat.className}>
         {" "}
         {/* Apply font class */}
-        <Header isLoggedIn={isLoggedIn} />
+        <Header />
         <main className="main_layout">{children}</main>
       </body>
     </html>

@@ -1,40 +1,42 @@
 .container {
   padding: 0;
-  min-height: 100vh;
+  height: calc(100vh - 80px);
   display: flex;
   flex-direction: column;
+  overflow: hidden;
 }
 
 .wrapper {
+  flex: 1;
   display: flex;
-  height: calc(100vh - 148px);
-  overflow-y: auto;
   position: relative;
+  overflow: hidden;
+  min-height: 0; /* This is important for flex child to respect parent height */
 }
 
 .hero_text {
-  padding: 3rem;
+
   display: flex;
   flex-direction: column;
   justify-content: center;
+  padding: 2rem 3rem;
   background-color: rgba(28, 74, 42, 1);
   color: white;
   width: 50%;
 }
 
 .hero_text h1 {
-  font-family: 'Montserrat', sans-serif;
-  font-size: 3rem;
-  font-weight: 500;
+  font-size: 2.5rem;
+  line-height: 1.2;
   margin-bottom: 1rem;
-  max-width: 60%;
+  max-width: 80%;
 }
 
 .hero_text p {
-  font-family: 'Montserrat', sans-serif;
-  line-height: 1.6;
-  color: rgba(255, 255, 255, 0.8);
-  max-width: 60%;
+  font-size: 1rem;
+  color: #7a7a7a;
+  max-width: 70%;
+  line-height: 1.5;
 }
 
 .hero_img {
@@ -47,19 +49,40 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  overflow: hidden;
+  padding: 1rem;
 }
 
 .appointmentContainer {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  padding: 2.5rem;
-  border-radius: 12px;
-  box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.1);
-  width: 90%;
-  max-width: 650px;
+  width: 80%;
+  max-width: 600px;
   background: white;
+  border-radius: 12px;
+  padding: 1.5rem ;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  height: calc(100vh - 224px);
+  overflow-y: auto;
+  position: relative;
+  margin: 0;
+}
+
+/* Custom scrollbar for the appointment container */
+.appointmentContainer::-webkit-scrollbar {
+  width: 6px;
+}
+
+.appointmentContainer::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 3px;
+}
+
+.appointmentContainer::-webkit-scrollbar-thumb {
+  background: #0f4d2d;
+  border-radius: 3px;
+}
+
+.appointmentContainer::-webkit-scrollbar-thumb:hover {
+  background: #0a3d23;
 }
 
 .pageContainer {
@@ -122,10 +145,15 @@
 
 /* Tablet Responsive Styles */
 @media (max-width: 1024px) {
+  .container {
+    height: auto;
+    min-height: 100vh;
+  }
+
   .wrapper {
     flex-direction: column;
     height: auto;
-    overflow-y: auto;
+    overflow: visible;
   }
 
   .hero_text,
@@ -154,7 +182,7 @@
 
   .hero_img {
     padding: 2rem 0;
-    min-height: 600px;
+    min-height: auto;
   }
 
   .appointmentContainer {
@@ -166,6 +194,9 @@
     top: auto;
     margin: 0 auto;
     padding: 2rem;
+    height: auto;
+    max-height: none;
+    overflow: visible;
   }
 }
 
@@ -173,6 +204,7 @@
 @media (max-width: 768px) {
   .wrapper {
     padding-bottom: 2rem;
+    overflow: visible;
   }
 
   .hero_text {
@@ -199,6 +231,9 @@
     width: 95%;
     padding: 1.5rem;
     margin: 0 auto;
+    height: auto;
+    max-height: none;
+    overflow: visible;
   }
 }
 
@@ -220,5 +255,8 @@
     width: 100%;
     padding: 1rem;
     border-radius: 8px;
+    height: auto;
+    max-height: none;
+    overflow: visible;
   }
 }

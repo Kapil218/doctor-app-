@@ -5,17 +5,18 @@ import style from "./header.module.css";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 
-interface HeaderProps {
-  isLoggedIn: boolean;
-}
 
-export default function Header({ isLoggedIn }: HeaderProps) {
+export default function Header() {
   const router = useRouter();
   const [menuOpen, setMenuOpen] = useState(false);
+  const [showLogout, setShowLogout] = useState(false);
   const pathname = usePathname();
 
   // Close menu when route changes
   useEffect(() => {
+    if(pathname!=="/login" && pathname!=="/signup") setShowLogout(true)
+      else{
+        setShowLogout(false);}
     setMenuOpen(false);
   }, [pathname]);
 
@@ -96,7 +97,7 @@ export default function Header({ isLoggedIn }: HeaderProps) {
 
   const AuthButtons = () => (
     <>
-      {isLoggedIn ? (
+      {showLogout ? (
         <>
           <button onClick={handleLogout} className={style.logoutButton}>
             Logout
