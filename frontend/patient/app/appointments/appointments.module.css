@@ -845,6 +845,9 @@
     font-size: 0.85rem;
     cursor: pointer;
     margin-left: 0.5rem;
+    display: inline-block;
+    line-height: 1;
+    user-select: none;
   }
 
   .clearButton:hover {

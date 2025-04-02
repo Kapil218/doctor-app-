@@ -182,9 +182,9 @@ const DoctorsPage = () => {
           >
             {getFilterLabel('rating', filters.rating)}
             {filters.rating && (
-              <button className={styles.clearButton} onClick={(e) => { e.stopPropagation(); clearFilter('rating'); }}>
+              <span className={styles.clearButton} onClick={(e) => { e.stopPropagation(); clearFilter('rating'); }}>
                 ×
-              </button>
+              </span>
             )}
           </button>
           <div className={`${styles.dropdownContent} ${activeDropdown === 'rating' ? styles.active : ''}`}>
@@ -214,9 +214,9 @@ const DoctorsPage = () => {
           >
             {getFilterLabel('experience', filters.experience)}
             {filters.experience && (
-              <button className={styles.clearButton} onClick={(e) => { e.stopPropagation(); clearFilter('experience'); }}>
+              <span className={styles.clearButton} onClick={(e) => { e.stopPropagation(); clearFilter('experience'); }}>
                 ×
-              </button>
+              </span>
             )}
           </button>
           <div className={`${styles.dropdownContent} ${activeDropdown === 'experience' ? styles.active : ''}`}>
@@ -246,9 +246,9 @@ const DoctorsPage = () => {
           >
             {getFilterLabel('gender', filters.gender)}
             {filters.gender && (
-              <button className={styles.clearButton} onClick={(e) => { e.stopPropagation(); clearFilter('gender'); }}>
+              <span className={styles.clearButton} onClick={(e) => { e.stopPropagation(); clearFilter('gender'); }}>
                 ×
-              </button>
+              </span>
             )}
           </button>
           <div className={`${styles.dropdownContent} ${activeDropdown === 'gender' ? styles.active : ''}`}>
