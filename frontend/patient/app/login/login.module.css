@@ -1,12 +1,10 @@
 .container {
+  background: url("../../public/Hero Image.svg") center/cover no-repeat;
   display: flex;
   align-items: center;
   justify-content: center;
+  padding: 2rem 1rem;
   min-height: calc(100vh - 90px);
-  background: url("../../public/Hero Image.svg") center/cover no-repeat;
-  padding: 20px;
-  position: relative;
-  top: 90px;
 }
 
 /* Glassmorphic Form Wrapper */
