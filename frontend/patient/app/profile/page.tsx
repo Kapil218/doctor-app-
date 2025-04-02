@@ -5,11 +5,14 @@ import styles from "./profile.module.css";
 type UserAppointment = {
   id: number;
   doctor_id: number;
+  patient_id: number;
   appointment_time: string;
   location: string;
   consultation_type: string;
   status: string;
   doctor_name: string;
+  managed_by_admin: null | string;
+  created_at: string;
 };
 
 type UserProfile = {
@@ -25,7 +28,7 @@ export default function UserProfile() {
 
   // Filter appointments by status
   const pendingAppointments = appointments.filter(app => app.status.toLowerCase() === 'pending');
-  const acceptedAppointments = appointments.filter(app => app.status.toLowerCase() === 'accepted');
+  const acceptedAppointments = appointments.filter(app => app.status.toLowerCase() === 'approved');
   const rejectedAppointments = appointments.filter(app => app.status.toLowerCase() === 'rejected');
   const completedAppointments = appointments.filter(app => app.status.toLowerCase() === 'completed');
 
@@ -46,7 +49,7 @@ export default function UserProfile() {
 
         const profileData = await profileRes.json();
         const appointmentsData = await appointmentsRes.json();
-console.log(appointmentsData,profileData);
+        console.log(appointmentsData,profileData);
 
         setUserInfo(profileData.data);
         setAppointments(appointmentsData.data);

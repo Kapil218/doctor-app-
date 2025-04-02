@@ -12,6 +12,7 @@
   right: 50%;
   margin-left: -50vw;
   margin-right: -50vw;
+  margin-bottom: 4rem;
   background: white;
   padding: 2rem 0;
   box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
@@ -290,7 +291,7 @@
 
 /* Doctor Card */
 .doctorCard {
-  background: white;
+  background-color: rgba(248, 252, 249, 1);
   border-radius: 12px;
   padding: 1.5rem;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
@@ -307,6 +308,7 @@
 
 .doctorCard:hover {
   transform: translateY(-4px);
+  background-color: white;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
 }
 

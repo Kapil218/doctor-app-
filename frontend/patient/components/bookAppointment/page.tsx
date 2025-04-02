@@ -193,7 +193,8 @@ const AppointmentPage = () => {
       try {
         setLoading(true);
         const response = await fetch(
-          `http://localhost:3000/api/v1/doctors/${id}`
+          `http://localhost:3000/api/v1/doctors/${id}`,
+          {credentials:"include"}
         );
         if (!response.ok) throw new Error("Failed to fetch doctor");
 
